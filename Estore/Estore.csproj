@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Protos\OrderService.proto" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- gRPC Core packages -->
+		<PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
+		<PackageReference Include="Google.Protobuf" Version="3.30.2" />
+		<PackageReference Include="Grpc.Tools" Version="2.49.0" PrivateAssets="All" />
+		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.70.0" />
+		<PackageReference Include="Stripe.net" Version="48.0.0" />
+	</ItemGroup>
+
+	<!-- Include Protobuf files for gRPC services -->
+	<ItemGroup>
+		<!-- Server-side Protobuf file for this project -->
+
+		<!-- Client-side Protobuf files from other services -->
+		<Protobuf Include="..\InventoryService\Protos\DeductionProcess.proto" GrpcServices="Client">
+			<Link>Protos\DeductionProcess.proto</Link>
+		</Protobuf>
+		<Protobuf Include="..\PaymentService\Protos\PaymentProcess.proto" GrpcServices="Client">
+			<Link>Protos\PaymentProcess.proto</Link>
+		</Protobuf>
+		<Protobuf Include="Protos\OrderService.proto" GrpcServices="Server" />
+	</ItemGroup>
+
+</Project>

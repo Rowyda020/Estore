@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "PaymentService.Protos";
+
+
+service PaymentPorcess{
+	rpc Transaction (TransactionRequest) returns (TransactionResponse);
+}
+
+
+message TransactionRequest {
+	int32 ClientID = 1;
+	double Balance = 2;
+}
+
+
+message TransactionResponse{
+	bool Success = 1;
+}
